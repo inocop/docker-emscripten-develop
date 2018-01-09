@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    container_name: "docker_emscripten"
+    build: ./web
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/html
+    privileged: true
