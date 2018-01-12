@@ -1,0 +1,1 @@
+emcc main.cpp -s WASM=1 -o build_wasm/index.html

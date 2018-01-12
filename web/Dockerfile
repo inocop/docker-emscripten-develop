@@ -4,35 +4,38 @@ MAINTAINER inocop
 
 RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
 
-#Update the package lists
-RUN apt-get update
+RUN apt-get update \ 
+&& apt-get install -y python2.7 \
+    nodejs \
+    build-essential \
+    cmake \
+    git-core \
+    default-jre \
+    apache2 \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
 
-# Install *gcc*(and related dependencies), cmake, Python, node.js, Java(optional, only needed for Closure Compiler minification), git, apache2
-RUN apt-get -y install  build-essential \
-                        cmake \
-                        python \
-                        nodejs \
-                        default-jre \
-                        git-core \
-                        apache2 \
-                        wget
+RUN ln -s /usr/bin/python2.7 /usr/bin/python
 
-WORKDIR /tmp
-RUN wget https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz
-RUN tar -zxvf emsdk-portable.tar.gz
-WORKDIR /tmp/emsdk-portable
+RUN mkdir /root/myfastcomp && \
+cd /root/myfastcomp && \
+git clone https://github.com/kripken/emscripten-fastcomp
 
-# Fetch the latest registry of available tools.
-RUN ./emsdk update
+RUN cd /root/myfastcomp/emscripten-fastcomp && \
+git clone https://github.com/kripken/emscripten-fastcomp-clang tools/clang
 
-# Download and install the latest SDK tools.
-RUN ./emsdk install latest
+# Build emscripten
+RUN cd /root/myfastcomp/emscripten-fastcomp && \
+mkdir build && \
+cd build && \
+cmake .. -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86;JSBackend" -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_TESTS=OFF && \
+make -j1
 
-# Make the "latest" SDK "active" for the current user. (writes ~/.emscripten file)
-RUN ./emsdk activate latest
+# Set Environment variables.
+ENV LLVM /root/myfastcomp/emscripten-fastcomp/build/bin
 
-# Activate PATH and other environment variables in the current terminal
-RUN source ./emsdk_env.sh
+ENV HOME /root
 
-# exec
+WORKDIR /root
+
 CMD apachectl -D FOREGROUND
