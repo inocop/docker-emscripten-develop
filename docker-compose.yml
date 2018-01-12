@@ -1,8 +1,10 @@
 version: '2'
 services:
-  web:
+  emcc:
     container_name: "docker_emscripten"
-    build: ./web
+    build:
+      context: "./dockerfiles"
+      dockerfile: "Dockerfile_use_emsdk"
     ports:
       - "8081:80"
     volumes:

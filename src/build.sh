@@ -1,1 +1,0 @@
-emcc main.cpp -o build/index.html
