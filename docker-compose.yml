@@ -4,7 +4,10 @@ services:
     container_name: "docker_emscripten"
     build:
       context: "./dockerfiles"
-      dockerfile: "Dockerfile_use_emsdk"
+      dockerfile: "Dockerfile_use_github"
+      args:
+        APT_GET_MIRROR: "http://ftp.jaist.ac.jp/pub/Linux/ubuntu/"
+        EMSCRIPTEN_VERSION: "1.37.28"
     ports:
       - "8081:80"
     volumes:

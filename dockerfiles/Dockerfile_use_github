@@ -2,7 +2,11 @@ FROM ubuntu:16.04
 
 MAINTAINER inocop
 
-RUN sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%http://ftp.jaist.ac.jp/pub/Linux/ubuntu/%g" /etc/apt/sources.list
+
+ARG APT_GET_MIRROR
+ARG EMSCRIPTEN_VERSION="1.37.28"
+
+RUN if [ "x${APT_GET_MIRROR}" != "x" ] ; then sed -i.bak -e "s%http://archive.ubuntu.com/ubuntu/%${APT_GET_MIRROR}%g" /etc/apt/sources.list ; fi
 
 RUN apt-get update \ 
 && apt-get install -y python2.7 \
@@ -19,10 +23,10 @@ RUN ln -s /usr/bin/python2.7 /usr/bin/python
 
 RUN mkdir /root/myfastcomp \
 &&  cd /root/myfastcomp \
-&&  git clone https://github.com/kripken/emscripten-fastcomp
+&&  git clone --depth=1 -b ${EMSCRIPTEN_VERSION} --single-branch https://github.com/kripken/emscripten-fastcomp
 
 RUN cd /root/myfastcomp/emscripten-fastcomp \
-&&  git clone https://github.com/kripken/emscripten-fastcomp-clang tools/clang
+&&  git clone --depth=1 -b ${EMSCRIPTEN_VERSION} --single-branch https://github.com/kripken/emscripten-fastcomp-clang tools/clang
 
 # Build emscripten
 RUN cd /root/myfastcomp/emscripten-fastcomp \
@@ -32,11 +36,14 @@ RUN cd /root/myfastcomp/emscripten-fastcomp \
 &&  make -j1
 
 WORKDIR /root
-RUN git clone https://github.com/kripken/emscripten.git \
+RUN git clone --depth=1 -b ${EMSCRIPTEN_VERSION} --single-branch https://github.com/kripken/emscripten.git \
 &&  ln -s /root/emscripten/emcc /usr/local/bin/emcc
 
 # Set Environment variables.
+ENV EMSCRIPTEN /root/emscripten
 ENV LLVM /root/myfastcomp/emscripten-fastcomp/build/bin
 ENV HOME /root
+
+RUN emcc -v
 
 CMD apachectl -D FOREGROUND
