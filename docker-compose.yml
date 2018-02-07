@@ -7,9 +7,10 @@ services:
       dockerfile: "Dockerfile_use_github"
       args:
         APT_GET_MIRROR: "http://ftp.jaist.ac.jp/pub/Linux/ubuntu/"
-        EMSCRIPTEN_VERSION: "1.37.28"
+        EMSCRIPTEN_VERSION: "1.37.33"
     ports:
-      - "8081:80"
+      - "6080:6080"
+      - "2020:22"
     volumes:
-      - ./src:/var/www/html
+      - ./src:/opt/src
     privileged: true

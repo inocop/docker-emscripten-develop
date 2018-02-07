@@ -1,4 +1,6 @@
-src/build_asm/*
-!src/build_asm/.gitkeep
-src/build_wasm/*
-!src/build_wasm/.gitkeep
+src/lib/*
+src/**/*.suo
+src/sample/bin
+src/sample/obj
+src/sample/**/*.suo
+src/.vs
