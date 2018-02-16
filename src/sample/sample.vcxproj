@@ -67,7 +67,7 @@
     <IncludePath>$(ProjectDir)../lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
