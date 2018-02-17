@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rsync -avr --delete /usr/include /opt/src/lib
+rsync -avr --delete /usr/include/ /opt/src/lib
