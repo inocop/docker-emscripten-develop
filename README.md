@@ -18,20 +18,22 @@ $ docker-compose up -d
 
 ## Debugging
 
-#### Visual Studio 2017
-
-1. Enable IntelliSense
-```
-$ docker exec docker_emscripten bash -c "sh /opt/src/rsync_lib.sh"
-```
-
-[Project property] > [Configuration properties] > [Linker] > [Input]  
-Library dependent file = m;GL;GLU;glut
+#### Visual Studio 2017 Setting
 
 [Project property] > [Configuration properties] > [VC++ directory]  
 Include directory += $(ProjectDir)../lib
 
-2. Connection SSH
+[Project property] > [Configuration properties] > [Linker] > [Input]  
+Library dependent file = m;GL;GLU;glut
+
+* Load library (for Enable IntelliSense)
+```
+$ docker exec docker_emscripten bash -c "sh /opt/src/rsync_lib.sh"
+```
+
+#### Debug run
+
+* Connection SSH
 
 [Option] > [Cross platform] > [Connection Manager]
 ```
@@ -42,10 +44,10 @@ Auth type: Password
 Password: root
 ```
 
+```
 [Project property] > [Configuration properties] > [General]  
 Remote build machine = 127.0.0.1 (username=root, port=2020, authentication=Password)
-
-3. Debug run
+```
 
 #### Show
 
