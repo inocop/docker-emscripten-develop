@@ -1,6 +1,5 @@
 src/lib/*
 src/**/*.suo
+src/**/.vs
 src/sample/bin
 src/sample/obj
-src/sample/**/*.suo
-src/.vs
