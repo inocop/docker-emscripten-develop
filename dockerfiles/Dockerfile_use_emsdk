@@ -29,10 +29,10 @@ RUN cd /root/emsdk-portable \
 &&  ./emsdk update \
 &&  ./emsdk install -j2 sdk-${EMSCRIPTEN_VERSION}-64bit \
 &&  ./emsdk activate sdk-${EMSCRIPTEN_VERSION}-64bit
-
 RUN /bin/bash -c "source /root/emsdk-portable/emsdk_env.sh"
-RUN ln -s $(find /root/emsdk-portable -name "emcc" | tail -n 1) /usr/local/bin/emcc
 
+
+ENV PATH $PATH:/root/emsdk-portable/emscripten/${EMSCRIPTEN_VERSION}
 ENV HOME /root
 ENV DISPLAY :0
 RUN echo "export DISPLAY=:0" >> /etc/profile

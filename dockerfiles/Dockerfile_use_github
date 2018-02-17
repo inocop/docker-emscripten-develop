@@ -35,9 +35,9 @@ RUN cd /root/myfastcomp/emscripten-fastcomp \
 &&  make -j2
 
 WORKDIR /root
-RUN git clone --depth=1 -b ${EMSCRIPTEN_VERSION} --single-branch https://github.com/kripken/emscripten.git \
-&&  ln -s /root/emscripten/emcc /usr/local/bin/emcc
+RUN git clone --depth=1 -b ${EMSCRIPTEN_VERSION} --single-branch https://github.com/kripken/emscripten.git
 
+ENV PATH $PATH:/root/emscripten
 ENV EMSCRIPTEN /root/emscripten
 ENV LLVM /root/myfastcomp/emscripten-fastcomp/build/bin
 ENV HOME /root
