@@ -1,3 +1,5 @@
 src/**/include/*
 src/**/build/*
-
+src/**/build_asm/*
+src/**/build_wasm/*
+!.gitkeep

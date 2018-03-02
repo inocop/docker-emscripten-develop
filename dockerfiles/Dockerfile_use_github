@@ -68,6 +68,10 @@ RUN apt-get -y install g++ \
                        gdb \
                        gdbserver
 
+# create symbolic link
+RUN ln -s /opt/src/sample/build_wasm /opt/novnc/em_wasm \
+&&  ln -s /opt/src/sample/build_asm /opt/novnc/em_asm
+
 # Clean up
 RUN apt-get autoclean \
 && apt-get autoremove \

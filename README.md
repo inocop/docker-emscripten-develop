@@ -38,8 +38,7 @@ http://localhost:6080/vnc.html
 
 #### Compile
 ```
-$ docker exec -it docker_emscripten bash
-# /opt/src/build_wasm.sh /opt/src/sample/main.c
+$ docker exec -it docker_emscripten bash -c 'cd /opt/src/sample/build_wasm && emcmake cmake .. && make'
 ```
 
 #### Show
