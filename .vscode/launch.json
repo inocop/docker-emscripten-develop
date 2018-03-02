@@ -1,0 +1,35 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "sample Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "sample_cmake",
+            "program": "/opt/src/sample/build/Main",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "/opt/src/sample/build",
+            "environment": [],
+            "externalConsole": true,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "docker",
+                "pipeArgs": [
+                    "exec", 
+                    "-i", 
+                    "docker_emscripten", 
+                    "sh",
+                    "-c"
+                ],
+                "debuggerPath": "/usr/bin/gdb"
+            },
+            "sourceFileMap": {
+                "/opt/src/sample": "${workspaceRoot}/src/sample"
+            }
+        }
+    ]
+}

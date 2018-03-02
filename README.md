@@ -2,59 +2,37 @@
 
 ## Local machine environment
 
-| #   | Version |
-| --- | ---|
-| OS  | Windows10 pro |
-| VM  | Docker version 17.12.0-ce, build c97c6d6 |
-| IDE | Visual Studio 2017 |
+| #      | Version |
+| :----- | :------ |
+| OS     | Windows10 pro |
+| VM     | Docker version 17.12.0-ce, build c97c6d6 |
+| Editor | Visual Studio Code |
+| vscode plugin | C/C++ |
 
 
 ## Compile & debug environment
+
 ```
 $ git clone https://github.com/inocop/docker-emscripten-develop.git
 $ cd docker-emscripten-develop
 $ docker-compose up -d
 ```
 
-## Debugging for Visual Studio 2017
+## Load Linux library (for Enable intelliSense)
 
-#### Project setting
-
-* [Project property] > [Configuration properties] > [VC++ directory]
 ```
-Include directory += $(ProjectDir)../lib
+$ docker exec docker_emscripten bash -c 'sh /opt/src/rsync_include.sh'
 ```
 
-* [Project property] > [Configuration properties] > [Linker] > [Input]
-```
-Library dependent file = m;GL;GLU;glut
-```
+## Run on Linux
 
-* Load library (for Enable IntelliSense)
-```
-$ docker exec docker_emscripten bash -c 'sh /opt/src/rsync_lib.sh'
-```
+#### Run
 
-#### Remote debug setting
-
-* [Tool] > [Option] > [Cross platform] > [Connection Manager]
-```
-Host: 127.0.0.1
-Port: 2020
-User: root
-Auth type: Password
-Password: root
-```
-
-* [Project property] > [Configuration properties] > [General]
-```
-Remote build machine = 127.0.0.1 (username=root, port=2020, authentication=Password)
-```
+Start vscode debug
 
 #### Show
 
 http://localhost:6080/vnc.html
-
 
 ## Emscripten
 

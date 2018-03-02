@@ -1,5 +1,3 @@
-src/lib/*
-src/**/*.suo
-src/**/.vs
-src/sample/bin
-src/sample/obj
+src/**/include/*
+src/**/build/*
+

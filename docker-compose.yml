@@ -10,7 +10,6 @@ services:
         EMSCRIPTEN_VERSION: "1.37.33"
     ports:
       - "6080:6080"
-      - "2020:22"
     volumes:
       - ./src:/opt/src
     privileged: true
