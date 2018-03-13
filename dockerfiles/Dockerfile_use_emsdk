@@ -52,7 +52,9 @@ RUN git clone https://github.com/novnc/noVNC.git /opt/novnc \
 
 # Install opengl
 RUN apt-get -y install freeglut3-dev \
+                       libglfw3-dev \
                        libglew-dev \
+                       mesa-utils \
                        vim
 
 # Install debugger
