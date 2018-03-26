@@ -31,7 +31,7 @@ RUN cd /root/myfastcomp/emscripten-fastcomp \
 RUN cd /root/myfastcomp/emscripten-fastcomp \
 &&  mkdir build \
 &&  cd build \
-&&  cmake .. -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="X86;JSBackend" -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_TESTS=OFF \
+&&  cmake .. -DCMAKE_BUILD_TYPE=MinSizeRel -DLLVM_TARGETS_TO_BUILD="X86;JSBackend" -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DCLANG_INCLUDE_TESTS=OFF \
 &&  make -j2
 
 WORKDIR /root
@@ -72,8 +72,8 @@ RUN apt-get -y install g++ \
                        gdbserver
 
 # create symbolic link
-RUN ln -s /opt/src/sample/build_wasm /opt/novnc/em_wasm \
-&&  ln -s /opt/src/sample/build_asm /opt/novnc/em_asm
+RUN ln -s /opt/src/output_wasm /opt/novnc/output_wasm \
+&&  ln -s /opt/src/output_asm /opt/novnc/output_asm
 
 # Clean up
 RUN apt-get autoclean \
@@ -81,7 +81,7 @@ RUN apt-get autoclean \
 && rm -rf /var/lib/apt/lists/*
 
 
-CMD /usr/bin/Xvfb :0 -screen 0 1024x768x24 \
+CMD /usr/bin/Xvfb :0 -screen 0 1024x600x24 \
 &   /usr/bin/x11vnc -display :0 -forever -shared \
 &   /usr/bin/fluxbox -display :0 \
 &   /opt/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080 \

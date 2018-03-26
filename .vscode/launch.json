@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "sample_cmake",
-            "program": "/opt/src/sample/build/Main",
+            "program": "/opt/src/sample/build/sample",
             "args": [],
             "stopAtEntry": false,
             "cwd": "/opt/src/sample/build",
@@ -18,17 +18,32 @@
             "pipeTransport": {
                 "pipeCwd": "${workspaceRoot}",
                 "pipeProgram": "docker",
-                "pipeArgs": [
-                    "exec", 
-                    "-i", 
-                    "docker_emscripten", 
-                    "sh",
-                    "-c"
-                ],
+                "pipeArgs": ["exec", "-i", "docker_emscripten", "sh", "-c"],
                 "debuggerPath": "/usr/bin/gdb"
             },
             "sourceFileMap": {
                 "/opt/src/sample": "${workspaceRoot}/src/sample"
+            }
+        },
+        {
+            "name": "sample02 Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "preLaunchTask": "sample02_cmake",
+            "program": "/opt/src/sample02/build/sample02",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "/opt/src/sample02/build",
+            "environment": [],
+            "externalConsole": true,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "docker",
+                "pipeArgs": ["exec", "-i", "docker_emscripten", "sh", "-c"],
+                "debuggerPath": "/usr/bin/gdb"
+            },
+            "sourceFileMap": {
+                "/opt/src/sample02": "${workspaceRoot}/src/sample02"
             }
         }
     ]

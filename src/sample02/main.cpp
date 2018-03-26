@@ -14,7 +14,7 @@ GLFWwindow *window;
 #include "/usr/include/glm/gtc/matrix_transform.hpp"
 using namespace glm;
 
-#include "shader.hpp"
+#include "../common/LoadShader.hpp"
 
 #ifdef __EMSCRIPTEN__
   #include <emscripten.h>

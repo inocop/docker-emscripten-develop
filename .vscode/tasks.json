@@ -7,6 +7,12 @@
             "label": "sample_cmake",
             "type": "shell",
             "command": "docker exec docker_emscripten bash -c 'cd /opt/src/sample/build/ && cmake .. && make'"
+        },
+        {
+            "label": "sample02_cmake",
+            "type": "shell",
+            "command": "docker exec docker_emscripten bash -c 'cd /opt/src/sample02/build/ && cmake .. && make'",
+            "problemMatcher": []
         }
     ]
 }
