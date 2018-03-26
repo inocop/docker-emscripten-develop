@@ -17,7 +17,11 @@ target_link_libraries(sample glut GLU GL m)
 
 
 if (EMSCRIPTEN)
-  # set(CMAKE_EXECUTABLE_SUFFIX ".html") # デフォルトでは.js
-  set(LINK_FLAGS "-s LEGACY_GL_EMULATION=1 -s LEGACY_VM_SUPPORT=1 -o ${CMAKE_SOURCE_DIR}/../output_asm/sample.html")
+  # set(CMAKE_EXECUTABLE_SUFFIX ".html")
+
+  set(LINK_FLAGS "-s LEGACY_GL_EMULATION=1")
+  set(LINK_FLAGS "${LINK_FLAGS} -s LEGACY_VM_SUPPORT=1") # support for ie over emscripte v1.37.23
+  set(LINK_FLAGS "${LINK_FLAGS} -o ${CMAKE_SOURCE_DIR}/../output_asm/sample.html")
+
   set_target_properties(sample PROPERTIES LINK_FLAGS "${LINK_FLAGS}")
 endif()
