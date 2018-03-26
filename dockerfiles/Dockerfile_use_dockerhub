@@ -11,38 +11,12 @@ ENV HOME /root
 ENV DISPLAY :0
 RUN echo "export DISPLAY=:0" >> /etc/profile
 
-
-# Setting remote desktop
-RUN apt-get -y install fluxbox \
-                       x11vnc \
-                       xvfb \
-                       net-tools
-RUN git clone https://github.com/novnc/noVNC.git /opt/novnc \
-&&  git clone https://github.com/kanaka/websockify /opt/novnc/utils/websockify
+RUN echo 'alias ll="ls -l"' >> ~/.bashrc
+RUN echo source ~/.bashrc
 
 
-# Install opengl
-RUN apt-get -y install freeglut3-dev \
-                       libglfw3-dev \
-                       libglew-dev \
-                       libglm-dev \
-                       mesa-utils \
-                       vim
+ADD setup.sh /opt/setup.sh
+ADD entry.sh /opt/entry.sh
+RUN /opt/setup.sh
 
-
-# Install debugger
-RUN apt-get -y install g++ \
-                       gdb \
-                       gdbserver
-
-
-# create symbolic link
-RUN ln -s /opt/src/output_wasm /opt/novnc/output_wasm \
-&&  ln -s /opt/src/output_asm /opt/novnc/output_asm
-
-
-CMD /usr/bin/Xvfb :0 -screen 0 1024x600x24 \
-&   /usr/bin/x11vnc -display :0 -forever -shared \
-&   /usr/bin/fluxbox -display :0 \
-&   /opt/novnc/utils/launch.sh --vnc localhost:5900 --listen 6080 \
-&&  tail -f /dev/null
+CMD /opt/entry.sh

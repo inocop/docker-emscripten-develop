@@ -5,9 +5,10 @@ services:
     build:
       context: "./dockerfiles"
       dockerfile: "Dockerfile_use_dockerhub"
-#      args:
-#        APT_GET_MIRROR: "http://ftp.jaist.ac.jp/pub/Linux/ubuntu/"
-#        EMSCRIPTEN_VERSION: "1.37.33"
+      #dockerfile: "Dockerfile_use_emsdk"
+      #args:
+      #  APT_GET_MIRROR: "http://ftp.jaist.ac.jp/pub/Linux/ubuntu/"
+      #  EMSCRIPTEN_VERSION: "1.37.33"
     ports:
       - "6080:6080"
     volumes:
