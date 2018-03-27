@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 project(sample02)
 
-set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
+set(CMAKE_CXX_FLAGS "-g -Wall -std=c++14")
 
 
 add_executable(sample02 main.cpp
